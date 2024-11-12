@@ -17,8 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "rgba(0, 0, 0, 0)"
+        "foregroundImage": "./assets/images/adaptive-icon.png"
       },
       "package": "com.navgo.webview"
     },
