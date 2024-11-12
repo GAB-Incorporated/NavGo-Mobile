@@ -39,7 +39,7 @@ jobs:
           fi
 
       - name: Output APK URL
-        run: echo "APK URL is: ${{ env.APK_URL }}"
+        echo: 'APK URL is: ${{ env.APK_URL }}"'
 
       # - name: Download APK
       #   if: success()
