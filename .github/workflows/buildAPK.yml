@@ -28,7 +28,7 @@ jobs:
       - name: Build app
         id: eas_build
         run: |
-          eas build --platform android --non-interactive
+          eas build --platform android --non-interactive --profile createAndroidAPK
           
           APK_URL=$(eas build:list --status completed --platform android --profile createAndroidAPK --limit 1 --output json | jq -r '.[0].artifacts.buildUrl' || echo "Error")
 
