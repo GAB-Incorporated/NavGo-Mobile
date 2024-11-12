@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#b4d2e700"
+        "backgroundColor": "rgba(0, 0, 0, 0)"
       },
       "package": "com.navgo.webview"
     },
