@@ -13,7 +13,8 @@
       "backgroundColor": "#b4d2e7"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "budleIdentifier": "com.navgo.webview"
     },
     "android": {
       "adaptiveIcon": {
