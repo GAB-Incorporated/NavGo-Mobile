@@ -26,12 +26,21 @@ jobs:
       - name: Build app
         id: eas_build
         run: |
+          # Start the build
           eas build --platform android --non-interactive --profile createAndroidAPK
           
-          APK_URL=$(eas build:list --status completed --platform android --profile createAndroidAPK --limit 1 --output json | jq -r '.[0].artifacts.buildUrl' || echo "Error")
+          # Capture the build list output without JSON parsing for debugging
+          BUILD_INFO=$(eas build:list --status completed --platform android --profile createAndroidAPK --limit 1)
+          echo "Build info output (debugging): $BUILD_INFO"
+
+          # Attempt to parse the URL only if output seems correct
+          APK_URL=$(echo "$BUILD_INFO" | jq -r '.[0].artifacts.buildUrl' 2>/dev/null || echo "Error")
 
           if [ "$APK_URL" = "Error" ]; then
             echo "Failed to parse URL from JSON output. Please check build logs."
+            exit 1
+          elif [ -z "$APK_URL" ] || [ "$APK_URL" = "null" ]; then
+            echo "No APK URL found in build output. Please check if the build completed successfully."
             exit 1
           else
             echo "APK_URL=${APK_URL}" >> $GITHUB_ENV
