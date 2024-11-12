@@ -26,4 +26,18 @@ jobs:
         run: npm install
 
       - name: Build app
-        run: eas build --platform android --non-interactive --no-wait
+        id: eas_build
+        run: |
+          eas build --platform android --non-interactive
+          echo "APK_URL=$(eas build:list --status completed --platform android --limit 1 --output json | jq -r '.[0].artifacts.buildUrl')" >> $GITHUB_ENV
+
+      # - name: Download APK
+      #   if: success()
+      #   run: |
+      #     curl -o navGo.apk "$APK_URL"
+
+      # - name: Upload APK as artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: navGo.apk
+      #     path: navGo.apk
