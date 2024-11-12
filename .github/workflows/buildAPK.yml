@@ -38,13 +38,16 @@ jobs:
             echo "APK_URL=${APK_URL}" >> $GITHUB_ENV
           fi
 
-      - name: Download APK
-        if: success()
-        run: |
-          curl -o navGo.apk "$APK_URL"
+      - name: Output APK URL
+        run: echo "APK URL is: ${{ env.APK_URL }}"
 
-      - name: Upload APK as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: navGo.apk
-          path: navGo.apk
+      # - name: Download APK
+      #   if: success()
+      #   run: |
+      #     curl -o navGo.apk "$APK_URL"
+
+      # - name: Upload APK as artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: navGo.apk
+      #     path: navGo.apk
