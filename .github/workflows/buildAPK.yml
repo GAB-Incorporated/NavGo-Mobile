@@ -1,7 +1,5 @@
 on:
-  push:
-    branches:
-      - main
+  [push]
 
 jobs:
   build:
@@ -29,23 +27,17 @@ jobs:
         id: eas_build
         run: |
           eas build --platform android --non-interactive --profile createAndroidAPK
-          
-          APK_URL=$(eas build:list --status completed --platform android --profile createAndroidAPK --limit 1 --output json | jq -r '.[0].artifacts.buildUrl' || echo "Error")
 
-          if [ "$APK_URL" = "Error" ]; then
-            echo "Failed to parse APK URL from JSON output. Please check build logs."
-            exit 1
-          else
-            echo "APK_URL=${APK_URL}" >> $GITHUB_ENV
-          fi
+      - name: Output APK URL
+        run: "echo APK URL is: ${{ env.APK_URL }}"
 
-      - name: Download APK
-        if: success()
-        run: |
-          curl -o navGo.apk "$APK_URL"
+      # - name: Download APK
+      #   if: success()
+      #   run: |
+      #     curl -o navGo.apk "$APK_URL"
 
-      - name: Upload APK as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: navGo.apk
-          path: navGo.apk
+      # - name: Upload APK as artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: navGo.apk
+      #     path: navGo.apk
