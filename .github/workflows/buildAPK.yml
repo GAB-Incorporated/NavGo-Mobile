@@ -26,17 +26,7 @@ jobs:
       - name: Build app
         id: eas_build
         run: |
-          # Start the build
-          eas build --platform android --non-interactive --profile createAndroidAPK --wait
-          
-          APK_URL=$(echo "$BUILD_OUTPUT" | grep -o 'https://expo.dev/[^ ]*')
-
-          if [ -z "$APK_URL" ]; then
-            echo "Failed to retrieve APK URL from build output."
-            exit 1
-          else
-            echo "APK_URL=${APK_URL}" >> $GITHUB_ENV
-          fi
+          eas build --platform android --non-interactive --profile createAndroidAPK
 
       - name: Output APK URL
         run: "echo APK URL is: ${{ env.APK_URL }}"
